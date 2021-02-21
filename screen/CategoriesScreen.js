@@ -3,25 +3,20 @@ import { Text, View, Button, FlatList, TouchableOpacity, StyleSheet} from 'react
 
 import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
+import CategoryScreenTile from '../components/CategoryScreenTile';
 
 const categoriesScreen = props => {
 
   const renderGridEntry = itemData => {
-    return(
-      <TouchableOpacity style={styles.gridItem} onPress={() => props.navigation.navigate({
+    return <CategoryScreenTile title={itemData.item.title} color={itemData.item.color} onSelect={() => {
+      props.navigation.navigate({
         routeName: 'CategoryMeals',
         params: {
           'CategoryId': itemData.item.id
         }
-      })}>
-        <View>
-          <Text>{itemData.item.title}</Text>
-        </View>
-      </TouchableOpacity>
-    );
+      })}}/>;
   }
 
-  console.log(CATEGORIES);
   return (
     <View style={styles.screen}>
       <FlatList keyExtractor={(item, index) => item.id} numColumns={2} data={CATEGORIES} renderItem={renderGridEntry}/>
@@ -38,11 +33,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  gridItem: {
-    width: '50%',
-    margin: 15,
-    height: 150
   }
 })
 

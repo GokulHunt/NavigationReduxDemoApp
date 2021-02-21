@@ -3,5 +3,6 @@ export default {
   accentColor: '#ff6f00',
   whiteColor: '#ffffff',
   blackColor: '#000000',
-  grayColor: '#cccccc'
+  grayColor: '#cccccc',
+  lightGrayColor: '#f5f5f5'
 }
