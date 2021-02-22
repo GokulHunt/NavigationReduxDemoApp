@@ -5,7 +5,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { MEALS } from '../data/dummy-data.js';
 import HeaderButton from '../components/HeaderButton';
 
-const mealDetailsScreen = props => {
+const MealDetailsScreen = props => {
   const mealId = props.navigation.getParam('mealId');
   const mealData = MEALS.filter(meal => meal.id === mealId)[0];
 
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   }
 });
 
-mealDetailsScreen.navigationOptions = navdata => {
+MealDetailsScreen.navigationOptions = navdata => {
   const mealId = navdata.navigation.getParam('mealId');
   const mealData = MEALS.filter(meal => meal.id === mealId)[0];
 
@@ -36,4 +36,4 @@ mealDetailsScreen.navigationOptions = navdata => {
   }
 }
 
-export default mealDetailsScreen;
+export default MealDetailsScreen;

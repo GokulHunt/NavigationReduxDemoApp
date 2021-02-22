@@ -5,7 +5,7 @@ import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 import CategoryScreenTile from '../components/CategoryScreenTile';
 
-const categoriesScreen = props => {
+const CategoriesScreen = props => {
 
   const renderGridEntry = itemData => {
     return <CategoryScreenTile title={itemData.item.title} color={itemData.item.color} onSelect={() => {
@@ -24,7 +24,7 @@ const categoriesScreen = props => {
   );
 }
 
-categoriesScreen.navigationOptions = {
+CategoriesScreen.navigationOptions = {
   headerTitle: 'Meal Categories'
 }
 
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default categoriesScreen;
+export default CategoriesScreen;

@@ -10,24 +10,30 @@ import { Platform } from 'react-native';
 import CategoriesScreen from '../screen/CategoriesScreen';
 import CategoryMealsScreen from '../screen/CategoryMealsScreen';
 import MealDetailsScreen from '../screen/MealDetailsScreen';
-import FavoriesScreen from '../screen/FavoritesScreen';
+import FavoritesScreen from '../screen/FavoritesScreen';
 import Colors from '../constants/Colors';
 
 import { Ionicons } from '@expo/vector-icons';
 
-
-const MealsStackNavigator = createStackNavigator({
-  Categories: CategoriesScreen,
-  CategoryMeals: CategoryMealsScreen,
-  MealDetails: MealDetailsScreen
-}, {
+const StackNavigatorConfig = {
   defaultNavigationOptions : {
     headerStyle: {
       backgroundColor: Platform.OS === 'android' ? Colors.primaryColor: Colors.whiteColor
     },
     headerTintColor:  Platform.OS === 'android' ? Colors.whiteColor : Colors.primaryColor
   }
-});
+};
+
+const MealsStackNavigator = createStackNavigator({
+  Categories: CategoriesScreen,
+  CategoryMeals: CategoryMealsScreen,
+  MealDetails: MealDetailsScreen
+}, StackNavigatorConfig);
+
+const FavoritesStackNavigator = createStackNavigator({
+  Favorites: FavoritesScreen,
+  MealDetails: MealDetailsScreen
+}, StackNavigatorConfig);
 
 const tabScreenConfig = {
   Meals: {
@@ -39,7 +45,7 @@ const tabScreenConfig = {
     }
   },
   Favorites: {
-    screen: FavoriesScreen,
+    screen: FavoritesStackNavigator,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor}/>
