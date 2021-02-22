@@ -24,7 +24,12 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 150,
     borderRadius: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    shadowColor: Colors.grayColor,
+    shadowOffset: { height: 0, width: 2 },
+    shadowRadius: 2,
+    shadowOpacity: 0.26,
+    elevation: 4
   },
   gridItemTouchable: {
     flex: 1,
@@ -35,13 +40,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    borderRadius: 10,
-    shadowColor: Colors.grayColor,
-    shadowOffset: { height: 0, width: 2 },
-    shadowRadius: 2,
-    shadowOpacity: 0.26,
-    elevation: 4
-
+    borderRadius: 10
   },
   gridItemText: {
     fontFamily: 'open-sans-bold',
