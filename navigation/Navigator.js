@@ -22,6 +22,9 @@ const StackNavigatorConfig = {
     headerStyle: {
       backgroundColor: Platform.OS === 'android' ? Colors.primaryColor: Colors.whiteColor
     },
+    headerTitleStyle: {
+      fontFamily: 'open-sans-bold'
+    },
     headerTintColor:  Platform.OS === 'android' ? Colors.whiteColor : Colors.primaryColor
   }
 };

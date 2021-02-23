@@ -1,18 +1,47 @@
 import React from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+import { Text, View, Image, ScrollView, StyleSheet} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { MEALS } from '../data/dummy-data.js';
 import HeaderButton from '../components/HeaderButton';
+import DefaultText from '../components/DefaultText';
+import Colors from '../constants/Colors';
+
+const BodyTextItem = props => {
+  return (
+    <View style={styles.bodyTextContainer}>
+      <Text style={styles.bodyText}>{props.children}</Text>
+    </View>
+  );
+}
 
 const MealDetailsScreen = props => {
   const mealId = props.navigation.getParam('mealId');
   const mealData = MEALS.filter(meal => meal.id === mealId)[0];
 
   return (
-    <View style={styles.screen}>
-      <Text>{mealData.title}</Text>
-    </View>
+    <ScrollView>
+      <View style={styles.screen}>
+        <Image  style={styles.image} source={{ uri: mealData.imageURL }}/>
+        <View style={styles.details} >
+          <DefaultText style={styles.detailText}>{mealData.duration}m</DefaultText>
+          <DefaultText style={styles.detailText}>{mealData.complexity.toUpperCase()}</DefaultText>
+          <DefaultText style={styles.detailText}>{mealData.affordability.toUpperCase()}</DefaultText>
+        </View>
+        <View style={styles.bodyContainer}>
+          <Text style={styles.subtitle}>Ingredients</Text>
+          {mealData.ingredients.map(ingredient => {
+            return <BodyTextItem>{ingredient}</BodyTextItem>;
+          })}
+        </View>
+        <View style={styles.bodyContainer}>
+          <Text style={styles.subtitle}>Steps</Text>
+          {mealData.steps.map(step => {
+            return <BodyTextItem>{step}</BodyTextItem>;
+          })}
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -21,6 +50,41 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  image: {
+    width: '100%',
+    height: 200
+  },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  detailText: {
+    paddingHorizontal: 40
+  },
+  bodyContainer: {
+    width: '100%',
+    marginVertical: 20
+  },
+  subtitle: {
+    fontSize: 22,
+    fontFamily: 'open-sans-bold',
+    textAlign: 'center'
+  },
+  bodyTextContainer: {
+    width: '100%',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    marginVertical: 5,
+    marginRight: 20,
+    borderColor: Colors.grayColor,
+    borderWidth: 1
+  },
+  bodyText: {
+    fontFamily: 'open-sans',
+    fontSize: 16,
+    textAlign: 'left'
   }
 });
 
