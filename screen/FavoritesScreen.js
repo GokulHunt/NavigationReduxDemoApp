@@ -7,14 +7,20 @@ import MealList from '../components/MealList';
 
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
+import DefaultText from '../components/DefaultText';
 
 const FavoritesScreen = props => {
   const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
-  console.log(favoriteMeals);
+
+  let content = <MealList listData={favoriteMeals} navigation={props.navigation}/>
+
+  if (favoriteMeals.length === 0 || !favoriteMeals) {
+    content = <DefaultText>No favorite meal is present. Start adding some!</DefaultText>
+  }
 
   return (
     <View style={styles.screen}>
-      <MealList listData={favoriteMeals} navigation={props.navigation}/>
+      {content}
     </View>
   );
 }

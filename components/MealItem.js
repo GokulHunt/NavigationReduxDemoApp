@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TouchableNativeFeedback, ImageBackground, StyleSheet, Platform } from 'react-native';
+
 import Colors from '../constants/Colors';
 
 import DefaultText from './DefaultText';
