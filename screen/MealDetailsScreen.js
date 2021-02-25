@@ -37,7 +37,7 @@ const MealDetailsScreen = props => {
     props.navigation.setParams({
       toggleFav: toggleFavoriteHandler
     })
-  }, [toggleFavoriteHandler])
+  }, [toggleFavoriteHandler]);
 
 
   return (
