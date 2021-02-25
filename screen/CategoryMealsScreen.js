@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
-
+import DefaultText from '../components/DefaultText';
 import MealList from '../components/MealList';
 
 
@@ -14,9 +14,15 @@ const CategoryMealsScreen = props => {
   const availableMeals = useSelector(state => state.meals.filteredMeals);
   const categoryMeals =  availableMeals.filter(meal => meal.categoryIds.indexOf(catid) >= 0);
 
+  let content = <MealList listData={categoryMeals} navigation={props.navigation}/>
+
+  if (categoryMeals.length === 0 || !categoryMeals) {
+    content = <DefaultText>No meals found. Please check your filter!</DefaultText>
+  }
+
   return (
     <View style={styles.screen}>
-      <MealList listData={categoryMeals} navigation={props.navigation}/>
+      {content}
     </View>
   );
 }
