@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Text, View, Image, ScrollView, StyleSheet} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { MEALS } from '../data/dummy-data.js';
+import { useSelector, useDispatch } from 'react-redux';
+
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
 import Colors from '../constants/Colors';
+
+import { toggleFavorite } from '../store/actions/meals';
 
 const BodyTextItem = props => {
   return (
@@ -17,7 +20,25 @@ const BodyTextItem = props => {
 
 const MealDetailsScreen = props => {
   const mealId = props.navigation.getParam('mealId');
-  const mealData = MEALS.filter(meal => meal.id === mealId)[0];
+  const availableMeals = useSelector(state => state.meals.meals);
+
+  const mealData = availableMeals.filter(meal => meal.id === mealId)[0];
+
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId));
+  }, [mealId, dispatch]);
+
+  useEffect(() => {
+    // props.navigation.setParams({
+    //   mealTitle: mealData.title
+    // });
+    props.navigation.setParams({
+      toggleFav: toggleFavoriteHandler
+    })
+  }, [toggleFavoriteHandler])
+
 
   return (
     <ScrollView>
@@ -88,12 +109,13 @@ const styles = StyleSheet.create({
 
 MealDetailsScreen.navigationOptions = navdata => {
   const mealId = navdata.navigation.getParam('mealId');
-  const mealData = MEALS.filter(meal => meal.id === mealId)[0];
+  const mealTitle = navdata.navigation.getParam('mealTitle');
+  const toggleFav = navdata.navigation.getParam('toggleFav');
 
   return {
-    headerTitle: mealData.title,
+    headerTitle: mealTitle,
     headerRight:  <HeaderButtons HeaderButtonComponent={HeaderButton}>
-      <Item title='Favorite' iconName='ios-star' onPress={() => console.log('Mark as Favorite!')}/>
+      <Item title='Favorite' iconName='ios-star' onPress={toggleFav}/>
     </HeaderButtons>
   }
 }

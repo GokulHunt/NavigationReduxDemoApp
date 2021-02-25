@@ -6,8 +6,17 @@ import MealItem from './MealItem';
 const MealList = props => {
 
   const categoryMealItem = itemData => {
-    return <MealItem title={itemData.item.title} onSelectMeal={() => {props.navigation.navigate({routeName: 'MealDetails', params: { 'mealId': itemData.item.id }})}}
-          duration={itemData.item.duration} complexity={itemData.item.complexity.toUpperCase()} affordability={itemData.item.affordability.toUpperCase()} image={itemData.item.imageURL}/>;
+    return <MealItem title={itemData.item.title}
+      onSelectMeal={() => {props.navigation.navigate({
+        routeName: 'MealDetails',
+        params: {
+          'mealId': itemData.item.id,
+          'mealTitle': itemData.item.title
+        }})}}
+      duration={itemData.item.duration}
+      complexity={itemData.item.complexity.toUpperCase()}
+      affordability={itemData.item.affordability.toUpperCase()}
+      image={itemData.item.imageURL}/>;
   }
 
   return <FlatList contentContainerStyle={styles.mealItemFlatList}
